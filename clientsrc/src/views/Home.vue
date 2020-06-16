@@ -37,15 +37,7 @@ export default {
     this.$store.dispatch("getBugs");
   },
   data() {
-    return {
-      // isActive: function() {
-      //   if (this.bug.status == "Closed") {
-      //     return true;
-      //   } else {
-      //     return false;
-      //   }
-      // }
-    };
+    return {};
   },
   computed: {
     bugs() {
