@@ -21,7 +21,7 @@
             <h4>{{bug.title}}</h4>
           </div>
           <div class="col-3">{{bug.creatorEmail}}</div>
-          <div class="col-3">{{bug.status}}</div>
+          <div class="col-3" v-bind:class="isActiveCheck(bug)">{{bug.status}}</div>
           <div class="col-3">{{bug.updatedAt}}</div>
         </div>
       </router-link>
@@ -37,21 +37,36 @@ export default {
     this.$store.dispatch("getBugs");
   },
   data() {
-    return {};
+    return {
+      // isActive: function() {
+      //   if (this.bug.status == "Closed") {
+      //     return true;
+      //   } else {
+      //     return false;
+      //   }
+      // }
+    };
   },
   computed: {
     bugs() {
       return this.$store.state.bugs;
     }
   },
-  methods: {},
+  methods: {
+    isActiveCheck(bug) {
+      return bug.status == "Closed" ? "red" : "green";
+    }
+  },
   components: {}
 };
 </script>
 
 
 <style scoped>
-red {
+.red {
   color: red;
+}
+.gree {
+  color: green;
 }
 </style>

@@ -7,7 +7,7 @@ const Bug = new Schema({
   description: { type: String, required: true },
   creatorEmail: { type: String, required: true },
   comments: [{ type: ObjectId }],
-  status: { type: String, required: true, default: "Open" }
+  status: { type: String, required: true, default: "Open", enum: ["Open", "Closed"] }
 }, { timestamps: true, toJSON: { virtuals: true } })
 
 Bug.virtual("creator",

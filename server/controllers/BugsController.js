@@ -68,7 +68,7 @@ export class BugsController extends BaseController {
 
   async delete(req, res, next) {
     try {
-      await boardsService.delete(req.params.id, req.userInfo.email);
+      await bugsService.close(req.params.id, req.userInfo.email);
       return res.send("Successfully deleted");
     } catch (error) {
       next(error);

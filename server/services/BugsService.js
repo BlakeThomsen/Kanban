@@ -22,8 +22,8 @@ class BugsService {
 
   async edit(id, userEmail, update) {
     let data = await dbContext.Bugs.findOneAndUpdate(
-      { _id: id, creatorEmail: userEmail },
-      { status: update.status },
+      { _id: id, creatorEmail: userEmail, status: "Open" },
+      update,
       { new: true }
     );
     if (!data) {
@@ -32,14 +32,16 @@ class BugsService {
     return data;
   }
 
-  async delete(id, userEmail) {
-    let data = await dbContext.Boards.findOneAndRemove({
-      _id: id,
-      creatorEmail: userEmail,
-    });
+  async close(id, userEmail) {
+    let data = await dbContext.Bugs.findOneAndUpdate(
+      { _id: id, creatorEmail: userEmail },
+      { status: "Closed" },
+      { new: true }
+    );
     if (!data) {
-      throw new BadRequest("Invalid ID or you do not own this board");
+      throw new BadRequest("Invalid ID or you do not own this bug");
     }
+    return data;
   }
 }
 
